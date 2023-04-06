@@ -6,13 +6,20 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
 import RootLayOut from "./components/RootLayOut";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayOut />}>
         <Route index element={<Home />} />
-        <Route path="/Product" element={<Product />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/contact" element={<Contact />} />
       </Route>
     )
   );
