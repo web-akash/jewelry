@@ -1,7 +1,7 @@
 import React from "react";
 import ContainerBox from "./ContainerBox";
 import Titel from "./Titel";
-import Product from "./Product";
+import Product from "./MyProduct";
 import Flex from "./Flex";
 
 const SpacialOffer = () => {

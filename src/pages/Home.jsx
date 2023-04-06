@@ -18,7 +18,6 @@ const Home = () => {
       <Bestseller />
       <Middeladd />
       <SpacialOffer />
-      <Footer />
     </>
   );
 };
