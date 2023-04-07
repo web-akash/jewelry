@@ -121,7 +121,7 @@ const Header = () => {
                           <Images imgsrc="assets/2_grande 5.png" />
                           <div>
                             <h3 className="mb-3 font-dm text-sm font-bold ">
-                              Black Smart Watch
+                              Golden Ring
                             </h3>
                             <p>$44.00</p>
                           </div>

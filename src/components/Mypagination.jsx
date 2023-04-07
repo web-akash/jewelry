@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Product from "./MyProduct";
 import Flex from "./Flex";
+import axios from "./Axios";
 const items = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 4, 5, 6, 7, 8, 9, 10, 11, 12,
   13, 14, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 4, 5, 6, 7, 8, 9, 10,
@@ -11,12 +12,33 @@ const items = [
 ];
 
 function Items({ currentItems }) {
+  let [proudData, setProudtData] = useState({});
+  let fatchData = async () => {
+    try {
+      let res = await axios.get("/productall");
+      setProudtData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fatchData();
+  }, []);
   return (
     <div className=" flex flex-wrap justify-between gap-y-12">
       {currentItems &&
         currentItems.map((item) => (
           <div className="w-[370px] ">
-            <Product imgsrc="assets/31_grande 1.png" />
+            {console.log("askdjf", currentItems)}
+            {proudData.myproduct?.map((item) => (
+              <Product
+                producTitel={item.productTitel}
+                productPrice={item.price}
+                brand={item.Jwelery}
+                imgsrc={item.itemImg}
+                batch={false}
+              />
+            ))}
           </div>
         ))}
     </div>

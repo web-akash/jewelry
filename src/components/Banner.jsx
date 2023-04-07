@@ -1,11 +1,22 @@
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
-
+import axios from "axios";
 import { useState } from "react";
 import Images from "./Images";
 import ContainerBox from "./ContainerBox";
+import { useEffect } from "react";
 const Banner = () => {
   let [currentSlide, setCurrentSlide] = useState(0);
+  let [bannerData, setBannerData] = useState({});
+
+  useEffect(() => {
+    async function fatchData() {
+      let res = await axios.get("https://jewelry-backend.vercel.app/bannar");
+      setBannerData(res.data);
+    }
+    fatchData();
+  }, []);
+  console.log(bannerData);
   const settings = {
     dots: true,
     infinite: true,
@@ -102,15 +113,11 @@ const Banner = () => {
         <ContainerBox>
           <div>
             <Slider {...settings}>
-              <div>
-                <Images imgsrc={"./assets/Banner.png"} />
-              </div>
-              <div>
-                <Images imgsrc={"./assets/Banner.png"} />
-              </div>
-              <div>
-                <Images imgsrc={"./assets/Banner.png"} />
-              </div>
+              {bannerData.bannar?.map((item) => (
+                <div>
+                  <Images className="w-full" imgsrc={item.item} />
+                </div>
+              ))}
             </Slider>
           </div>
         </ContainerBox>

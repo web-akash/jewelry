@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ContainerBox from "./ContainerBox";
 import Titel from "./Titel";
 import Product from "./MyProduct";
 import { BsArrowRightCircle, BsArrowLeftCircle } from "react-icons/bs";
 
 import Slider from "react-slick";
+import axios from "./Axios";
 const NewArrivals = () => {
+  let [newArrData, setNewArrData] = useState({});
+  let fatchData = async () => {
+    let res = await axios.get("/newArrivals");
+    setNewArrData(res.data);
+  };
+
+  useEffect(() => {
+    fatchData();
+  }, []);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -60,7 +71,7 @@ const NewArrivals = () => {
     <>
       <ContainerBox>
         <div className="relative mt-8 lg:mt-32">
-          <Titel titel="New Arrivals" />
+          <Titel titel={newArrData.titel} />
           <button onClick={() => slider?.current?.slickNext()}>
             <BsArrowRightCircle className=" absolute top-[220%] right-0 z-10 h-[64px] w-[64px] rounded-full bg-[#979797] text-sm text-white  " />
           </button>
@@ -69,21 +80,17 @@ const NewArrivals = () => {
           </button>
         </div>
         <Slider ref={slider} {...settings}>
-          <div className="max-w-[370px]  ">
-            <Product imgsrc="assets/Image (1).png" batch={true} />
-          </div>
-          <div className="max-w-[370px] ">
-            <Product imgsrc="assets/Image (2).png" />
-          </div>
-          <div className="max-w-[370px] ">
-            <Product imgsrc="assets/31_grande 1.png" batch={true} />
-          </div>
-          <div className="max-w-[370px] ">
-            <Product imgsrc="assets/product1.png" />
-          </div>
-          <div className="max-w-[370px] ">
-            <Product imgsrc="assets/Image (2).png" />
-          </div>
+          {newArrData.myproduct?.map((item) => (
+            <div className="max-w-[370px]  ">
+              <Product
+                producTitel={item.productTitel}
+                productPrice={item.price}
+                brand={item.Jwelery}
+                imgsrc={item.itemImg}
+                batch={true}
+              />
+            </div>
+          ))}
         </Slider>
       </ContainerBox>
     </>

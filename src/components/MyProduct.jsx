@@ -6,7 +6,7 @@ import { GiSelfLove } from "react-icons/gi";
 import { SiConvertio } from "react-icons/si";
 import { GrShop } from "react-icons/gr";
 
-const Product = ({ imgsrc, batch }) => {
+const Product = ({ imgsrc, batch, producTitel, productPrice, brand }) => {
   return (
     <>
       <div className="group relative w-full overflow-hidden ">
@@ -34,9 +34,10 @@ const Product = ({ imgsrc, batch }) => {
       </div>
       <div className=" w-full bg-white py-5">
         <h2 className="text-[#262626 ] flex justify-between font-dm text-xl font-bold text-[#262626]">
-          Basic Crew Neck Tee<span className="text-[#767676]">$44.00</span>
+          {producTitel}
+          <span className="text-[#767676]">{productPrice}</span>
         </h2>
-        <p className="mt-5 text-base">Black</p>
+        <p className="mt-5 text-base">{brand}</p>
       </div>
     </>
   );

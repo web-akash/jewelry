@@ -15,11 +15,11 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<RootLayOut />}>
         <Route index element={<Home />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/Product" element={<Product />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Contacts" element={<Contact />} />
+        <Route path="/Booking" element={<Booking />} />
+        <Route path="/Contact" element={<Contact />} />
       </Route>
     )
   );

@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ContainerBox from "./ContainerBox";
 import Titel from "./Titel";
 import Product from "./MyProduct";
 import Flex from "./Flex";
+import axios from "./Axios";
 
 const Bestseller = () => {
+  let [newArrData, setNewArrData] = useState({});
+  let fatchData = async () => {
+    let res = await axios.get("/ourBestsellers");
+    setNewArrData(res.data);
+  };
+
+  useEffect(() => {
+    fatchData();
+  }, []);
+
   return (
     <>
       <ContainerBox>
         <div className="relative mt-8 lg:mt-32">
-          <Titel titel="Our Bestsellers " />
+          <Titel titel={newArrData.titel} />
         </div>
         <Flex className="flex flex-wrap justify-between  gap-y-5">
-          <div className="justify-between  sm:max-w-[300px] lg:max-w-[370px] ">
-            <Product imgsrc="assets/Image (1).png" batch={true} />
-          </div>
-          <div className="justify-between  sm:max-w-[300px] lg:max-w-[370px]">
-            <Product imgsrc="assets/Image (2).png" />
-          </div>
-          <div className="justify-between  sm:max-w-[300px] lg:max-w-[370px]">
-            <Product imgsrc="assets/31_grande 1.png" batch={true} />
-          </div>
-          <div className="justify-between  sm:max-w-[300px] lg:max-w-[370px]">
-            <Product imgsrc="assets/product1.png" />
-          </div>
+          {newArrData.myproduct?.slice(1).map((item) => (
+            <div className=" flex   sm:max-w-[300px] lg:max-w-[370px] ">
+              <div>
+                <Product
+                  producTitel={item.productTitel}
+                  productPrice={item.price}
+                  brand={item.Jwelery}
+                  imgsrc={item.itemImg}
+                  batch={false}
+                />
+              </div>
+            </div>
+          ))}
         </Flex>
       </ContainerBox>
     </>
